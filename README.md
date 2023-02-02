@@ -1,1 +1,1 @@
-# PythonFundamentalsHomeworksJan2023
+# PythonFundamentalsHomeworkJan2023
