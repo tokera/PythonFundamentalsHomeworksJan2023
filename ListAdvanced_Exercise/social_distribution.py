@@ -1,27 +1,22 @@
-population = list(map(int, input().split(", ")))
+population = [int(x) for x in input().split(", ")]
 min_wealth = int(input())
 
-under_min_wealth_population = list(filter(lambda x: x < min_wealth, population))
-above_min_wealth_population = list(filter(lambda y: y >= min_wealth, population))
+below_min_wealth = list(filter(lambda x: x < min_wealth, population))
+above_min_wealth = list(filter(lambda y: y >= min_wealth, population))
 
-needed_wealth = (min_wealth * len(under_min_wealth_population)) - sum(under_min_wealth_population)
-result = []
+needed_wealth = [min_wealth - x for x in below_min_wealth]
 
-if (sum(above_min_wealth_population) - needed_wealth) >= (len(above_min_wealth_population) * min_wealth):
-    result = [min_wealth] * len(under_min_wealth_population)
+if (sum(above_min_wealth) - sum(needed_wealth)) >= (len(above_min_wealth) * min_wealth):
+    below_min_wealth = [min_wealth for x in below_min_wealth]
 
-while needed_wealth == 0:
-    idx = above_min_wealth_population.index(max(above_min_wealth_population))
+    while needed_wealth:
+        idx_of_needed_wealth = 0
+        idx_of_max = above_min_wealth.index(max(above_min_wealth))
 
-    if above_min_wealth_population[idx] - needed_wealth >= min_wealth:
-        above_min_wealth_population[idx] -= needed_wealth
-        needed_wealth = 0
-    else:
-        needed_wealth -= above_min_wealth_population[idx] - min_wealth
-        above_min_wealth_population[idx] = min_wealth
+        if (above_min_wealth[idx_of_max] - needed_wealth[idx_of_needed_wealth]) >= 0:
+            above_min_wealth[idx_of_max] -= needed_wealth[idx_of_needed_wealth]
+            needed_wealth.pop(idx_of_needed_wealth)
 
-print(result + above_min_wealth_population)
-
-
-
-
+    print(below_min_wealth + above_min_wealth)
+else:
+    print("No equal distribution possible")
