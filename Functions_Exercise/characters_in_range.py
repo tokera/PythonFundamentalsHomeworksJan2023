@@ -1,7 +1,3 @@
-first_char = input()
-second_char = input()
-
-
 def find_characters_in_range(f_char, s_char):
     res = ""
 
@@ -10,5 +6,8 @@ def find_characters_in_range(f_char, s_char):
 
     return res
 
+
+first_char = input()
+second_char = input()
 
 print(find_characters_in_range(first_char, second_char))

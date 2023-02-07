@@ -1,6 +1,3 @@
-password = input()
-
-
 def is_valid_password(password_for_validating):
     is_valid = True
     if len(password_for_validating) < 6 or len(password_for_validating) > 10:
@@ -26,5 +23,7 @@ def is_valid_password(password_for_validating):
     if is_valid:
         print("Password is valid")
 
+
+password = input()
 
 is_valid_password(password)
