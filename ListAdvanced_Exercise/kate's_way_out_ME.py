@@ -1,22 +1,37 @@
-def find_initial_coordinates(matrix: list):
+def find_start(matrix: list):
     coordinates = []
     for r in range(len(matrix)):
-        for c in range(len(matrix[r])):
-            if matrix[r][c] == "k":
-                coordinates.append(r)
-                coordinates.append(c)
-                return coordinates
+        if "k" in matrix[r]:
+            coordinates.append(r)
+            coordinates.append(matrix[r].index("k"))
+            return coordinates
+
+    return coordinates
 
 
 def is_valid_position(matrix, r, c):
     if r < 0 or c < 0:
         return False
-    elif r >= len(matrix) or c > len(matrix[0]):
+    elif r >= len(matrix) or c >= len(matrix[0]):
         return False
-    elif matrix[r][c] == "#":
-        return False
-
     return True
+
+
+def find_possible_moves(current_maze, r, c):
+    moves = []
+    if r - 1 >= 0:
+        moves.append([r - 1, c])
+
+    if c - 1 >= 0:
+        moves.append([r, c - 1])
+
+    if r + 1 < len(current_maze):
+        moves.append([r + 1, c])
+
+    if c + 1 < len(current_maze[0]):
+        moves.append([r, c + 1])
+
+    return moves
 
 
 rows = int(input())
@@ -27,30 +42,11 @@ for _ in range(rows):
     row = input()
     maze.append([x for x in row])
 
-initial_position = find_initial_coordinates(maze)
-movies = [initial_position]
+initial_position = find_start(maze)
+moves = [initial_position]
 
-while movies:
-    current_r, current_c = movies.pop()
-
-    if current_r == 0 or current_c == 0 or current_r == len(maze) or current_c == len(maze[0]):
-        break
-    if maze[current_r][current_c] == "x":
-        continue
-
-    if is_valid_position(maze, current_r, current_c + 1):
-        movies.append([current_r, current_c + 1])
-        maze[current_r][current_c + 1] = "x"
-    if is_valid_position(maze, current_r, current_c - 1):
-        movies.append([current_r, current_c - 1])
-        maze[current_r][current_c - 1] = "x"
-    if is_valid_position(maze, current_r + 1, current_c):
-        movies.append([current_r + 1, current_c])
-        maze[current_r + 1][current_c] = "x"
-    if is_valid_position(maze, current_r - 1, current_c):
-        movies.append([current_r - 1, current_c])
-        maze[current_r - 1][current_c] = "x"
-
+while moves:
+    pass
 
 
 
